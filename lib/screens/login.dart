@@ -13,6 +13,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController username = TextEditingController(text: "");
+  TextEditingController password = TextEditingController(text: "");
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
             flex: 7,
             child: Container(
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text(
                     "Login",
@@ -66,8 +75,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     "hi, user Please Login to continue",
                     style: StylesApp.titleDescStyle,
                   ),
+
+                  /////////////////////////////////////
                   Container(
-                    color: Colors.amber,
+                    // color: Colors.amber,
                     width: MediaQuery.of(context).size.width * 0.5,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,12 +89,93 @@ class _LoginScreenState extends State<LoginScreen> {
                           "User Name",
                           style: StylesApp.normalStyle,
                         ),
-
+                        SpacesApp.spaceH_10,
                         TextFormField(
-                          
-                        )
+                          controller: username,
+                          decoration: InputDecoration(
+                            hintText: "UserName",
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                  color: AppColors.primaryColor,
+                                )),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                        SpacesApp.spaceH_10,
+                        Text(
+                          "Password",
+                          style: StylesApp.normalStyle,
+                        ),
+                        SpacesApp.spaceH_10,
+                        TextFormField(
+                       
+                          controller: password,
+                          decoration: InputDecoration(
+                            hintText: "Password",
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                borderSide: BorderSide(
+                                  color: AppColors.primaryColor,
+                                )),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
+                  ),
+                  //SpacesApp.spaceH_20,
+///////////////////////////////////////////
+                  FilledButton(
+                    onPressed: () {
+                      print(username.text);
+                      print(username.text);
+                    },
+                    child: Text("Login"),
+                    style: FilledButton.styleFrom(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width * 0.1),
+                      backgroundColor: AppColors.primaryColor,
+                    ),
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.desktop_mac_rounded,
+                          color: AppColors.theirdColor,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.tablet_android,
+                          color: AppColors.theirdColor,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.language,
+                          color: AppColors.theirdColor,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.sync,
+                          color: AppColors.theirdColor,
+                        ),
+                      ),
+                    ],
                   )
                 ],
               ),
