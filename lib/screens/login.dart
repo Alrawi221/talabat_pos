@@ -1,9 +1,15 @@
 import 'package:clay_containers/clay_containers.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:talabat_pos/screens/home.dart';
+
+import 'package:talabat_pos/services/login_service.dart';
 import 'package:talabat_pos/utils/color.dart';
 import 'package:talabat_pos/utils/images.dart';
 import 'package:talabat_pos/utils/spaces.dart';
 import 'package:talabat_pos/utils/styles.dart';
+
+import '../models/login_model.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -111,7 +117,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         SpacesApp.spaceH_10,
                         TextFormField(
-                       
                           controller: password,
                           decoration: InputDecoration(
                             hintText: "Password",
@@ -131,11 +136,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   //SpacesApp.spaceH_20,
 ///////////////////////////////////////////
                   FilledButton(
-                    onPressed: () {
-                      print(username.text);
-                      print(username.text);
+                    onPressed: () async {
+                      LoginService loginService = LoginService();
+
+                      var res = await loginService.login(LoginPost(
+                          userName: username.text, password: password.text));
+                      if (res == true) {
+                        Navigator.of(context).pushReplacementNamed('/Home');
+                      } else {
+                        print("wrong");
+                      }
                     },
-                    child: Text("Login"),
+                    child:const Text("Login"),
                     style: FilledButton.styleFrom(
                       padding: EdgeInsets.symmetric(
                           horizontal: MediaQuery.of(context).size.width * 0.1),
