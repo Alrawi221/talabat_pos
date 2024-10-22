@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   clay_containers:
   dio:
+  provider:
 
 dev_dependencies:
   flutter_test:

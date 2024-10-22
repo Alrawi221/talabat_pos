@@ -1,6 +1,7 @@
 import 'package:clay_containers/clay_containers.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:talabat_pos/screens/home.dart';
 
 import 'package:talabat_pos/services/login_service.dart';
@@ -21,6 +22,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController username = TextEditingController(text: "");
   TextEditingController password = TextEditingController(text: "");
+
   @override
   void initState() {
     // TODO: implement initState
@@ -30,6 +32,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var loginService = Provider.of<LoginService>(
+      context,
+    );
     return Scaffold(
       body: Row(
         children: [
@@ -135,25 +140,34 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   //SpacesApp.spaceH_20,
 ///////////////////////////////////////////
-                  FilledButton(
-                    onPressed: () async {
-                      LoginService loginService = LoginService();
+                  loginService.getIsloading
+                      ? CircularProgressIndicator(
+                          color: AppColors.primaryColor,
+                        )
+                      : FilledButton(
+                          onPressed: () async {
+                            loginService.setisLoading = true;
 
-                      var res = await loginService.login(LoginPost(
-                          userName: username.text, password: password.text));
-                      if (res == true) {
-                        Navigator.of(context).pushReplacementNamed('/Home');
-                      } else {
-                        print("wrong");
-                      }
-                    },
-                    child:const Text("Login"),
-                    style: FilledButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: MediaQuery.of(context).size.width * 0.1),
-                      backgroundColor: AppColors.primaryColor,
-                    ),
-                  ),
+                            var res = await loginService.login(LoginPost(
+                                userName: username.text,
+                                password: password.text));
+                            if (res == true) {
+                              Navigator.of(context)
+                                  .pushReplacementNamed('/Home');
+                            } else {
+                              loginService.setisLoading = false;
+
+                              print("wrong");
+                            }
+                          },
+                          child: const Text("Login"),
+                          style: FilledButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width * 0.1),
+                            backgroundColor: AppColors.primaryColor,
+                          ),
+                        ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
