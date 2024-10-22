@@ -6,6 +6,14 @@ import 'package:talabat_pos/utils/url.dart';
 class CategoryService with ChangeNotifier {
   Dio dio = Dio();
   CategoryModel? categoryModel;
+  int? _indexCategory = 1;
+
+  get getIndexCategory => _indexCategory;
+
+  set setIndexCategory(value) {
+    _indexCategory = value;
+    notifyListeners();
+  }
 
   Future<CategoryModel> getCategories() async {
     bool res = false;
@@ -30,7 +38,7 @@ class CategoryService with ChangeNotifier {
       print(onError);
       print("#######################");
     });
-
+    notifyListeners();
     return categoryModel!;
   }
 }
