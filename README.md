@@ -1,5 +1,4 @@
 # talabat_pos
 
-A new Flutter project.
-![Screen Shot] ([![image](https://github.com/user-attachments/assets/dc8fa54e-99e3-4e76-ac91-7d508806ace1)
-)) 
+Talabat POS .
+![Screen Shot] ![image](https://github.com/user-attachments/assets/dc8fa54e-99e3-4e76-ac91-7d508806ace1)
